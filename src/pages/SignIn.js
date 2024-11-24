@@ -28,28 +28,29 @@ const SignIn = () => {
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast.error("유효한 이메일 형식이 아닙니다.");
-      return;
+      return false;
     }
 
     const isSigningUp = e.nativeEvent.submitter.innerText === "REGISTER";
     if (isSigningUp) {
       if (apiKey !== confirmApiKey) {
         toast.error("API Key가 일치하지 않습니다.");
-        return;
+        return false;
       }
       if (!agreeTerms) {
         toast.error("약관에 동의해야 회원가입 가능합니다.");
-        return;
+        return false;
       }
 
       const isValid = await validateApiKey(apiKey);
       if (!isValid) {
         toast.error("유효하지 않은 TMDB API Key입니다.");
-        return;
+        return false;
       }
 
       localStorage.setItem("user", JSON.stringify({ email, apiKey }));
       toast.success("회원가입 완료! 로그인 화면으로 이동합니다.");
+      return true; // 회원가입 성공
     } else {
       const storedUser = JSON.parse(localStorage.getItem("user"));
       if (storedUser?.email === email && storedUser?.apiKey === apiKey) {
@@ -58,6 +59,7 @@ const SignIn = () => {
       } else {
         toast.error("이메일 또는 API Key가 잘못되었습니다.");
       }
+      return false;
     }
   };
 

@@ -6,6 +6,11 @@ import { Toaster } from "react-hot-toast";
 const AuthForm = ({ handleSubmit, formData, handleInputChange }) => {
   const [isSigningUp, setIsSigningUp] = useState(false); // 로그인/회원가입 상태 관리
 
+  // 회원가입 성공 시 호출되는 함수
+  const handleSignupSuccess = () => {
+    setIsSigningUp(false); // 로그인 폼으로 전환
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-900">
       <Toaster />
@@ -30,6 +35,7 @@ const AuthForm = ({ handleSubmit, formData, handleInputChange }) => {
             formData={formData}
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
+            onSignupSuccess={handleSignupSuccess} // 회원가입 성공 시 콜백 전달
           />
         </div>
         <div className="absolute bottom-4 w-full text-center">
