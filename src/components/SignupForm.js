@@ -1,10 +1,18 @@
 import React from "react";
 
-const SignupForm = ({ formData, handleInputChange, handleSubmit }) => {
+const SignupForm = ({ formData, handleInputChange, handleSubmit, onSignupSuccess }) => {
+  const handleSignupSubmit = async (e) => {
+    e.preventDefault();
+    const success = await handleSubmit(e); // handleSubmit에서 회원가입 성공 여부 반환
+    if (success) {
+      onSignupSuccess(); // 회원가입 성공 시 로그인 폼으로 전환
+    }
+  };
+
   return (
     <div className="absolute inset-0 w-full h-full flex flex-col justify-center items-center">
       <h2 className="text-3xl font-bold text-gray-800 mb-4">Sign up</h2>
-      <form onSubmit={handleSubmit} className="w-4/5 space-y-4">
+      <form onSubmit={handleSignupSubmit} className="w-4/5 space-y-4">
         <input
           type="email"
           name="email"
