@@ -1,6 +1,8 @@
+<<<<<<< HEAD
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import SignIn from "./pages/SignIn";
+<<<<<<< HEAD
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -10,26 +12,44 @@ const ProtectedRoute = ({ children }) => {
   const isLoggedIn = !!localStorage.getItem("user");
   return isLoggedIn ? children : <Navigate to="/signin" />;
 };
+=======
+import Home from "./pages/Home"; // 메인 페이지 예제
+import { isAuthenticated } from "./utils/auth";
+>>>>>>> feature/login
+=======
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppContent from './Router';
+>>>>>>> feature/login
 
-const App = () => {
+function App() {
   return (
     <Router>
+<<<<<<< HEAD
       <Toaster position="top-center" reverseOrder={false} /> {/* Toaster 추가 */}
       <Header />
       <Routes>
-        <Route path="/signin" element={<SignIn />} />
+        {/* 로그인 상태 확인 미들웨어 */}
         <Route
           path="/"
           element={
+<<<<<<< HEAD
             <ProtectedRoute>
               <Home />
             </ProtectedRoute>
+=======
+            isAuthenticated() ? <Home /> : <Navigate to="/signin" replace />
+>>>>>>> feature/login
           }
         />
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
       <Footer />
+=======
+      <AppContent />
+>>>>>>> feature/login
     </Router>
   );
-};
+}
 
 export default App;
