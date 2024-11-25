@@ -1,9 +1,15 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}", // Tailwind를 적용할 파일 경로
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {}, // 커스텀 스타일 추가 시 사용
+    extend: {
+      transitionProperty: {
+        'height': 'height',
+        'spacing': 'margin, padding',
+      }
+    },
   },
   plugins: [],
-};
+}
